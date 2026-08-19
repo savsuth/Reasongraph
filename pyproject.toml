@@ -138,7 +138,7 @@ models-huggingface = [
 
 # ---- Graph Backends ----
 graph-neo4j = ["neo4j>=5.0.0"]
-graph-falkordb = ["falkordb>=1.0.0", "redis>=4.3.0"]
+graph-falkordb = ["falkordb>=1.7.1", "redis>=4.3.0"]
 graph-amazon-neptune = ["boto3>=1.24.0", "neo4j>=5.0.0"]
 graph-apache-age = ["psycopg2-binary>=2.9.0"]
 
