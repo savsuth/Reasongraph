@@ -120,7 +120,7 @@ parse-docling = ["docling>=2.107.0"]
 shacl = ["pyshacl>=0.25.0"]
 
 # ---- Database Connectors ----
-db-snowflake = ["snowflake-connector-python>=4.6.0", "cryptography>=49.0.0"]
+db-snowflake = ["snowflake-connector-python>=4.7.2", "cryptography>=49.0.0"]
 db-databricks = ["databricks-sdk>=0.60.0", "databricks-sql-connector>=4.0.0"]
 db-arrow = ["pyarrow>=24.0.0"]
 ingest-parquet = ["pyarrow>=24.0.0"]
