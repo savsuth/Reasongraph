@@ -1,0 +1,17 @@
+{
+  "name": "reasongraph-continue",
+  "plugins": [
+    {
+      "name": "reasongraph",
+      "description": "Reasongraph plugin for Continue.dev: knowledge graph context provider, reasoning, and extraction.",
+      "source": "./",
+      "category": "Productivity",
+      "tags": [
+        "knowledge-graph",
+        "reasoning",
+        "reasongraph",
+        "continue"
+      ]
+    }
+  ]
+}

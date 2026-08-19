@@ -1,0 +1,35 @@
+{
+  "name": "reasongraph-cline",
+  "displayName": "Reasongraph Cline Plugin",
+  "description": "Reasongraph plugin for Cline: knowledge graph skills, decision intelligence, reasoning, extraction, and visualization.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Aasav Suthar"
+  },
+  "homepage": "https://github.com/savsuth/Reasongraph",
+  "repository": "https://github.com/savsuth/Reasongraph",
+  "license": "MIT",
+  "keywords": [
+    "reasongraph",
+    "knowledge graph",
+    "cline",
+    "context graphs",
+    "decision intelligence",
+    "explainability",
+    "causal analysis",
+    "provenance",
+    "ontology",
+    "graph analytics",
+    "semantic extraction",
+    "visualization",
+    "reasoning",
+    "mcp"
+  ],
+  "skills": "../skills",
+  "agents": "../agents",
+  "hooks": "../hooks/hooks.json",
+  "mcp": {
+    "server": "python -m reasongraph.mcp_server",
+    "transport": "stdio"
+  }
+}

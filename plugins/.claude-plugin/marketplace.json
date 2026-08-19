@@ -1,0 +1,20 @@
+{
+  "name": "reasongraph-local",
+  "owner": {
+    "name": "Aasav Suthar",
+    "url": "https://github.com/savsuth/Reasongraph"
+  },
+  "plugins": [
+    {
+      "name": "reasongraph",
+      "description": "Reasongraph plugin for Claude: knowledge graph skills, reasoning, extraction, and visualization.",
+      "source": "./",
+      "category": "Productivity",
+      "tags": [
+        "knowledge-graph",
+        "reasoning",
+        "reasongraph"
+      ]
+    }
+  ]
+}

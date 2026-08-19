@@ -1,0 +1,18 @@
+{
+  "name": "reasongraph-openclaw",
+  "plugins": [
+    {
+      "name": "reasongraph",
+      "description": "Reasongraph plugin for OpenClaw: knowledge graph skills, decision intelligence, reasoning, extraction, and visualization.",
+      "source": "./",
+      "category": "Productivity",
+      "tags": [
+        "knowledge-graph",
+        "reasoning",
+        "reasongraph",
+        "openclaw",
+        "mcp"
+      ]
+    }
+  ]
+}

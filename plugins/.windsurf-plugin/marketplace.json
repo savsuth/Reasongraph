@@ -1,0 +1,17 @@
+{
+  "name": "reasongraph-windsurf",
+  "plugins": [
+    {
+      "name": "reasongraph",
+      "description": "Reasongraph plugin for Windsurf: knowledge graph skills, reasoning, extraction, and visualization.",
+      "source": "./",
+      "category": "Productivity",
+      "tags": [
+        "knowledge-graph",
+        "reasoning",
+        "reasongraph",
+        "windsurf"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "name": "reasongraph",
+  "description": "Full-stack knowledge graph skills: semantic extraction, decision intelligence, context graphs, reasoning, explainability, ontology, provenance, deduplication, visualization, and multi-format export.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Aasav Suthar"
+  },
+  "homepage": "https://github.com/savsuth/Reasongraph",
+  "repository": "https://github.com/savsuth/Reasongraph",
+  "license": "MIT",
+  "keywords": [
+    "reasongraph",
+    "knowledge graph",
+    "context graphs",
+    "decision intelligence",
+    "explainability",
+    "causal analysis",
+    "provenance",
+    "ontology",
+    "graph analytics",
+    "semantic extraction",
+    "visualization",
+    "reasoning",
+    "extraction",
+    "mcp"
+  ],
+  "skills": "./skills",
+  "agents": "./agents"
+}

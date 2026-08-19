@@ -1,0 +1,46 @@
+{
+  "name": "reasongraph-openclaw",
+  "displayName": "Reasongraph OpenClaw Plugin",
+  "description": "Reasongraph plugin for OpenClaw: knowledge graph skills, decision intelligence, reasoning, extraction, and visualization via MCP and native REST tool.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Aasav Suthar"
+  },
+  "homepage": "https://github.com/savsuth/Reasongraph",
+  "repository": "https://github.com/savsuth/Reasongraph",
+  "license": "MIT",
+  "keywords": [
+    "reasongraph",
+    "knowledge graph",
+    "openclaw",
+    "context graphs",
+    "decision intelligence",
+    "explainability",
+    "causal analysis",
+    "provenance",
+    "ontology",
+    "graph analytics",
+    "semantic extraction",
+    "visualization",
+    "reasoning",
+    "mcp"
+  ],
+  "skills": "../skills",
+  "agents": "../agents",
+  "hooks": "../hooks/hooks.json",
+  "mcp": {
+    "server": "python -m reasongraph.mcp_server",
+    "transport": "stdio"
+  },
+  "openclaw": {
+    "mcporter": {
+      "mcpServers": {
+        "reasongraph": {
+          "command": "python",
+          "args": ["-m", "reasongraph.mcp_server"],
+          "transport": "stdio"
+        }
+      }
+    }
+  }
+}
