@@ -139,7 +139,7 @@ models-huggingface = [
 # ---- Graph Backends ----
 graph-neo4j = ["neo4j>=5.0.0"]
 graph-falkordb = ["falkordb>=1.0.0", "redis>=4.3.0"]
-graph-amazon-neptune = ["boto3>=1.24.0", "neo4j>=5.0.0"]
+graph-amazon-neptune = ["boto3>=1.43.72", "neo4j>=5.0.0"]
 graph-apache-age = ["psycopg2-binary>=2.9.0"]
 
 graph-all = [
@@ -172,7 +172,7 @@ infra = [
 
 # ---- Cloud Providers ----
 cloud = [
-  "boto3>=1.24.0",
+  "boto3>=1.43.72",
   "azure-storage-blob>=12.30.0",
   "google-cloud-storage>=2.5.0"
 ]
