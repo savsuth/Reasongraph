@@ -1,0 +1,33 @@
+{
+  "name": "reasongraph-continue",
+  "displayName": "Reasongraph Continue Plugin",
+  "description": "Reasongraph plugin for Continue.dev: knowledge graph context provider, decision intelligence, reasoning, and semantic extraction.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Aasav Suthar"
+  },
+  "homepage": "https://github.com/savsuth/Reasongraph",
+  "repository": "https://github.com/savsuth/Reasongraph",
+  "license": "MIT",
+  "keywords": [
+    "reasongraph",
+    "knowledge graph",
+    "continue",
+    "context provider",
+    "decision intelligence",
+    "explainability",
+    "causal analysis",
+    "provenance",
+    "ontology",
+    "semantic extraction",
+    "reasoning",
+    "mcp"
+  ],
+  "skills": "../skills",
+  "agents": "../agents",
+  "hooks": "../hooks/hooks.json",
+  "mcp": {
+    "server": "python -m reasongraph.mcp_server",
+    "transport": "stdio"
+  }
+}

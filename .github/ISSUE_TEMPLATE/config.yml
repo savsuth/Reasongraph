@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 📚 Documentation
+    url: https://github.com/savsuth/Reasongraph/tree/main/docs
+    about: Browse the documentation
+  - name: 💬 Discussions
+    url: https://github.com/savsuth/Reasongraph/discussions
+    about: Ask questions and discuss with the community

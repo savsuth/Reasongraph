@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 340" width="1200" height="340" role="img" aria-label="Reasongraph">
+  <title>Reasongraph</title>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B1120"/>
+      <stop offset="55%" stop-color="#101a2e"/>
+      <stop offset="100%" stop-color="#0d1526"/>
+    </linearGradient>
+
+    <radialGradient id="halo" cx="50%" cy="34%" r="52%">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.20"/>
+      <stop offset="55%" stop-color="#6366F1" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#0B1120" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="50%" stop-color="#818CF8"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+
+    <linearGradient id="wordmark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#C7D2E4"/>
+    </linearGradient>
+
+    <linearGradient id="rule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#818CF8" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- canvas -->
+  <rect x="0" y="0" width="1200" height="340" rx="26" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1200" height="340" rx="26" fill="url(#halo)"/>
+  <rect x="0.75" y="0.75" width="1198.5" height="338.5" rx="25.5" fill="none" stroke="#1E293B" stroke-width="1.5"/>
+
+  <!-- knowledge-graph motif: edges first so nodes sit on top -->
+  <g stroke-linecap="round" fill="none">
+    <!-- spokes from the hub -->
+    <g stroke="#3B5378" stroke-width="1.7" opacity="0.95">
+      <line x1="600" y1="110" x2="505" y2="58"/>
+      <line x1="600" y1="110" x2="668" y2="48"/>
+      <line x1="600" y1="110" x2="735" y2="112"/>
+      <line x1="600" y1="110" x2="690" y2="168"/>
+      <line x1="600" y1="110" x2="556" y2="176"/>
+      <line x1="600" y1="110" x2="468" y2="126"/>
+    </g>
+    <!-- open perimeter chain -->
+    <g stroke="#2A3A55" stroke-width="1.4" opacity="0.9">
+      <line x1="505" y1="58" x2="668" y2="48"/>
+      <line x1="668" y1="48" x2="735" y2="112"/>
+      <line x1="735" y1="112" x2="690" y2="168"/>
+      <line x1="690" y1="168" x2="556" y2="176"/>
+      <line x1="556" y1="176" x2="468" y2="126"/>
+    </g>
+    <!-- leaf edges -->
+    <g stroke="#243449" stroke-width="1.2" opacity="0.85">
+      <line x1="735" y1="112" x2="762" y2="66"/>
+      <line x1="468" y1="126" x2="452" y2="182"/>
+    </g>
+  </g>
+
+  <!-- hub halo + hub -->
+  <circle cx="600" cy="110" r="40" fill="#8B5CF6" opacity="0.10"/>
+  <circle cx="600" cy="110" r="26" fill="#818CF8" opacity="0.16"/>
+  <circle cx="600" cy="110" r="15" fill="url(#accent)"/>
+  <circle cx="600" cy="110" r="15" fill="none" stroke="#C4B5FD" stroke-width="1.2" opacity="0.55"/>
+
+  <!-- satellite nodes -->
+  <g fill="#0F172A" stroke-width="2.2">
+    <circle cx="505" cy="58"  r="8"   stroke="#8B5CF6"/>
+    <circle cx="668" cy="48"  r="10"  stroke="#A78BFA"/>
+    <circle cx="735" cy="112" r="7"   stroke="#22D3EE"/>
+    <circle cx="690" cy="168" r="8.5" stroke="#38BDF8"/>
+    <circle cx="556" cy="176" r="7"   stroke="#8B5CF6"/>
+    <circle cx="468" cy="126" r="8"   stroke="#22D3EE"/>
+  </g>
+
+  <!-- leaf dots -->
+  <g fill="#475569">
+    <circle cx="762" cy="66"  r="4.5"/>
+    <circle cx="452" cy="182" r="4.5"/>
+  </g>
+
+  <!-- wordmark -->
+  <text x="600" y="278" text-anchor="middle"
+        font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+        font-size="84" font-weight="700" letter-spacing="-2.5"
+        fill="url(#wordmark)">Reasongraph</text>
+
+  <!-- accent rule -->
+  <rect x="440" y="302" width="320" height="2" rx="1" fill="url(#rule)"/>
+</svg>

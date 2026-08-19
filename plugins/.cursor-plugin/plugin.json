@@ -1,0 +1,32 @@
+{
+  "name": "reasongraph-cursor",
+  "displayName": "Reasongraph Cursor Plugin",
+  "description": "Reasongraph plugin for Cursor: knowledge graph skills, reasoning, extraction, and visualization.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Aasav Suthar"
+  },
+  "homepage": "https://github.com/savsuth/Reasongraph",
+  "repository": "https://github.com/savsuth/Reasongraph",
+  "license": "MIT",
+  "keywords": [
+    "reasongraph",
+    "knowledge graph",
+    "cursor",
+    "context graphs",
+    "decision intelligence",
+    "explainability",
+    "causal analysis",
+    "provenance",
+    "ontology",
+    "graph analytics",
+    "semantic extraction",
+    "visualization",
+    "reasoning",
+    "extraction",
+    "mcp"
+  ],
+  "skills": "./skills",
+  "agents": "./agents",
+  "hooks": "./hooks/hooks.json"
+}

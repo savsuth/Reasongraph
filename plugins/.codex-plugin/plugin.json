@@ -1,0 +1,35 @@
+{
+  "name": "reasongraph-codex",
+  "description": "Reasongraph plugin for Codex: knowledge graph commands, export capabilities, and reasoning workflows.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Aasav Suthar"
+  },
+  "homepage": "https://github.com/savsuth/Reasongraph",
+  "repository": "https://github.com/savsuth/Reasongraph",
+  "license": "MIT",
+  "keywords": [
+    "reasongraph",
+    "knowledge graph",
+    "codex",
+    "context graphs",
+    "decision intelligence",
+    "explainability",
+    "causal analysis",
+    "provenance",
+    "ontology",
+    "graph analytics",
+    "semantic extraction",
+    "visualization",
+    "reasoning",
+    "extraction",
+    "mcp"
+  ],
+  "skills": "./skills",
+  "interface": {
+    "displayName": "Reasongraph Codex Plugin",
+    "shortDescription": "Knowledge graph skills for Reasongraph workflows",
+    "category": "Productivity",
+    "developerName": "Aasav Suthar"
+  }
+}

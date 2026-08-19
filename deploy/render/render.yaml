@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: reasongraph-knowledge-explorer
+    runtime: docker
+    plan: starter
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: ALLOWED_ORIGINS
+        value: https://reasongraph-knowledge-explorer.onrender.com
+      - key: FALKORDB_HOST
+        fromService:
+          type: keyvalue
+          name: reasongraph-explorer-redis
+          property: host
+      - key: FALKORDB_PORT
+        fromService:
+          type: keyvalue
+          name: reasongraph-explorer-redis
+          property: port
+      - key: REASONGRAPH_API_KEY
+        generateValue: true
+
+  - type: keyvalue
+    name: reasongraph-explorer-redis
+    plan: starter
+    ipAllowList: []
+    maxmemoryPolicy: noeviction
+    persistenceMode: snapshot

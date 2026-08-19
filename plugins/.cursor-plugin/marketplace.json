@@ -1,0 +1,18 @@
+{
+  "name": "reasongraph-local",
+  "owner": {
+    "name": "Aasav Suthar"
+  },
+  "metadata": {
+    "description": "Reasongraph plugin marketplace for Cursor.",
+    "version": "0.1.0",
+    "pluginRoot": "."
+  },
+  "plugins": [
+    {
+      "name": "reasongraph-cursor",
+      "description": "Reasongraph plugin for Cursor: knowledge graph skills and analytics.",
+      "source": "."
+    }
+  ]
+}
