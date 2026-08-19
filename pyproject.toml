@@ -196,7 +196,7 @@ viz = [
 # ---- GPU ----
 gpu = [
   "faiss-gpu>=1.7.0",
-  "cupy>=10.0.0"
+  "cupy>=14.1.1"
 ]
 
 # ---- Agentic Framework Integrations ----
