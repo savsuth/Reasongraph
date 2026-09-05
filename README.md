@@ -22,20 +22,6 @@ pip install reasongraph
 
 ---
 
-<div align="center">
-
-<img
-  src="docs/assets/img/reasongraph-knowledge-explorer-demo.gif"
-  alt="Reasongraph Knowledge Explorer: live graph, decisions, entity resolution, ontology hub"
-  width="900"
-/>
-
-*Knowledge Explorer · Context Graphs · Reasoning Engine · Decision Intelligence · Ontology Hub*
-
-</div>
-
----
-
 Most AI agents act without a trail. They store embeddings, not meaning: context that can't be explained, decisions that can't be audited. In lending, that gap is a compliance exposure, not an inconvenience: an underwriting agent's approval has to survive a regulator's "why" months later.
 
 Reasongraph sits underneath your LLM, vector store, and agent framework as a deterministic infrastructure layer: no LLM required for graph construction, reasoning, or provenance.
