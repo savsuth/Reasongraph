@@ -32,12 +32,6 @@
       <stop offset="100%" stop-color="#C7D2E4"/>
     </linearGradient>
 
-    <linearGradient id="rule" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#818CF8" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
-    </linearGradient>
-
     <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0%"   stop-color="#FFFFFF" stop-opacity="0"/>
       <stop offset="42%"  stop-color="#FFFFFF" stop-opacity="0"/>
@@ -60,7 +54,6 @@
             font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
             font-size="84" font-weight="700" letter-spacing="-2.5" fill="#fff">Reasongraph</text>
     </mask>
-    <clipPath id="ruleClip"><rect x="440" y="303" width="320" height="6" rx="3"/></clipPath>
 
     <style>
       @keyframes hubBeat  { 0%,100%{ transform:scale(1);    opacity:.06 } 50%{ transform:scale(1.24); opacity:.13 } }
@@ -70,7 +63,6 @@
       @keyframes drift    { 0%,100%{ transform:translate(0,0) } 50%{ transform:translate(44px,-20px) } }
       @keyframes drift2   { 0%,100%{ transform:translate(0,0) } 50%{ transform:translate(-36px,18px) } }
       @keyframes sheenX   { 0%,66%,100%{ transform:translateX(-560px) } 84%{ transform:translateX(560px) } }
-      @keyframes ruleX    { 0%{ transform:translateX(-150px) } 100%{ transform:translateX(370px) } }
 
       @keyframes tp1 { 0%{transform:translate(-95px,-52px);opacity:0} 10%{opacity:1} 78%{opacity:1} 100%{transform:translate(0,0);opacity:0} }
       @keyframes tp2 { 0%{transform:translate(68px,-62px);opacity:0}  10%{opacity:1} 78%{opacity:1} 100%{transform:translate(0,0);opacity:0} }
@@ -87,7 +79,6 @@
       .sat  { animation:breathe 4.4s ease-in-out infinite }
       .s2{animation-delay:.5s}.s3{animation-delay:1s}.s4{animation-delay:1.5s}.s5{animation-delay:2s}.s6{animation-delay:2.6s}
       .sheenG{ animation:sheenX 7s ease-in-out infinite }
-      .ruleG { animation:ruleX 3.4s linear infinite }
 
       .tp{ animation-duration:2.6s; animation-timing-function:ease-in; animation-iteration-count:infinite }
       .t1{animation-name:tp1;animation-delay:0s}
@@ -98,7 +89,7 @@
       .t6{animation-name:tp6;animation-delay:1.1s}
 
       @media (prefers-reduced-motion: reduce) {
-        .hbeat,.hring,.hcore,.aur1,.aur2,.sat,.sheenG,.ruleG,.tp { animation: none !important }
+        .hbeat,.hring,.hcore,.aur1,.aur2,.sat,.sheenG,.tp { animation: none !important }
         .sat{ opacity:.9 } .tp{ opacity:0 !important }
       }
     </style>
@@ -175,14 +166,8 @@
   </g>
 
   <!-- tagline -->
-  <text x="600" y="296" text-anchor="middle"
+  <text x="600" y="298" text-anchor="middle"
         font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
         font-size="11.5" font-weight="500" letter-spacing="3.4"
         fill="#8CA0BE">GRAPH-NATIVE INFRASTRUCTURE FOR ACCOUNTABLE AI</text>
-
-  <!-- accent rule + travelling light -->
-  <rect x="440" y="305" width="320" height="2" rx="1" fill="url(#rule)"/>
-  <g clip-path="url(#ruleClip)">
-    <g class="ruleG"><rect x="440" y="303" width="86" height="6" rx="3" fill="#BFE9FF" opacity="0.85" filter="url(#glow)"/></g>
-  </g>
 </svg>
