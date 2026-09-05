@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 340" width="1200" height="340" role="img" aria-label="Reasongraph">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 340" width="1200" height="340" role="img" aria-label="Reasongraph — graph-native infrastructure for accountable AI">
   <title>Reasongraph</title>
+  <desc>A living knowledge graph: trace pulses travel each spoke into the hub, dramatising trace_decision_chain().</desc>
 
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
@@ -8,9 +9,15 @@
       <stop offset="100%" stop-color="#0d1526"/>
     </linearGradient>
 
-    <radialGradient id="halo" cx="50%" cy="34%" r="52%">
+    <radialGradient id="halo" cx="50%" cy="33%" r="52%">
       <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.20"/>
       <stop offset="55%" stop-color="#6366F1" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#0B1120" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="aurora" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#818CF8" stop-opacity="0.15"/>
+      <stop offset="60%" stop-color="#22D3EE" stop-opacity="0.05"/>
       <stop offset="100%" stop-color="#0B1120" stop-opacity="0"/>
     </radialGradient>
 
@@ -30,16 +37,82 @@
       <stop offset="50%" stop-color="#818CF8" stop-opacity="0.85"/>
       <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
     </linearGradient>
+
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="42%"  stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="50%"  stop-color="#FFFFFF" stop-opacity="0.7"/>
+      <stop offset="58%"  stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3.4"/>
+    </filter>
+    <filter id="glow" x="-140%" y="-140%" width="380%" height="380%">
+      <feGaussianBlur stdDeviation="1.8" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <mask id="wordMask">
+      <rect x="0" y="0" width="1200" height="340" fill="#000"/>
+      <text x="600" y="266" text-anchor="middle"
+            font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+            font-size="84" font-weight="700" letter-spacing="-2.5" fill="#fff">Reasongraph</text>
+    </mask>
+    <clipPath id="ruleClip"><rect x="440" y="303" width="320" height="6" rx="3"/></clipPath>
+
+    <style>
+      @keyframes hubBeat  { 0%,100%{ transform:scale(1);    opacity:.06 } 50%{ transform:scale(1.24); opacity:.13 } }
+      @keyframes hubRing  { 0%,100%{ transform:scale(1);    opacity:.10 } 50%{ transform:scale(1.10); opacity:.17 } }
+      @keyframes hubCore  { 0%,100%{ opacity:.85 } 50%{ opacity:1 } }
+      @keyframes breathe  { 0%,100%{ opacity:.72 } 50%{ opacity:1 } }
+      @keyframes drift    { 0%,100%{ transform:translate(0,0) } 50%{ transform:translate(44px,-20px) } }
+      @keyframes drift2   { 0%,100%{ transform:translate(0,0) } 50%{ transform:translate(-36px,18px) } }
+      @keyframes sheenX   { 0%,66%,100%{ transform:translateX(-560px) } 84%{ transform:translateX(560px) } }
+      @keyframes ruleX    { 0%{ transform:translateX(-150px) } 100%{ transform:translateX(370px) } }
+
+      @keyframes tp1 { 0%{transform:translate(-95px,-52px);opacity:0} 10%{opacity:1} 78%{opacity:1} 100%{transform:translate(0,0);opacity:0} }
+      @keyframes tp2 { 0%{transform:translate(68px,-62px);opacity:0}  10%{opacity:1} 78%{opacity:1} 100%{transform:translate(0,0);opacity:0} }
+      @keyframes tp3 { 0%{transform:translate(135px,2px);opacity:0}   10%{opacity:1} 78%{opacity:1} 100%{transform:translate(0,0);opacity:0} }
+      @keyframes tp4 { 0%{transform:translate(90px,58px);opacity:0}   10%{opacity:1} 78%{opacity:1} 100%{transform:translate(0,0);opacity:0} }
+      @keyframes tp5 { 0%{transform:translate(-44px,66px);opacity:0}  10%{opacity:1} 78%{opacity:1} 100%{transform:translate(0,0);opacity:0} }
+      @keyframes tp6 { 0%{transform:translate(-132px,16px);opacity:0} 10%{opacity:1} 78%{opacity:1} 100%{transform:translate(0,0);opacity:0} }
+
+      .hbeat{ transform-origin:600px 110px; animation:hubBeat 2.6s ease-in-out infinite }
+      .hring{ transform-origin:600px 110px; animation:hubRing 2.6s ease-in-out infinite }
+      .hcore{ animation:hubCore 2.6s ease-in-out infinite }
+      .aur1 { animation:drift 20s ease-in-out infinite }
+      .aur2 { animation:drift2 24s ease-in-out infinite }
+      .sat  { animation:breathe 4.4s ease-in-out infinite }
+      .s2{animation-delay:.5s}.s3{animation-delay:1s}.s4{animation-delay:1.5s}.s5{animation-delay:2s}.s6{animation-delay:2.6s}
+      .sheenG{ animation:sheenX 7s ease-in-out infinite }
+      .ruleG { animation:ruleX 3.4s linear infinite }
+
+      .tp{ animation-duration:2.6s; animation-timing-function:ease-in; animation-iteration-count:infinite }
+      .t1{animation-name:tp1;animation-delay:0s}
+      .t2{animation-name:tp2;animation-delay:.9s}
+      .t3{animation-name:tp3;animation-delay:1.5s}
+      .t4{animation-name:tp4;animation-delay:.4s}
+      .t5{animation-name:tp5;animation-delay:1.9s}
+      .t6{animation-name:tp6;animation-delay:1.1s}
+
+      @media (prefers-reduced-motion: reduce) {
+        .hbeat,.hring,.hcore,.aur1,.aur2,.sat,.sheenG,.ruleG,.tp { animation: none !important }
+        .sat{ opacity:.9 } .tp{ opacity:0 !important }
+      }
+    </style>
   </defs>
 
   <!-- canvas -->
   <rect x="0" y="0" width="1200" height="340" rx="26" fill="url(#bg)"/>
+  <g class="aur1"><ellipse cx="380" cy="150" rx="250" ry="180" fill="url(#aurora)" filter="url(#soft)"/></g>
+  <g class="aur2"><ellipse cx="860" cy="150" rx="230" ry="170" fill="url(#aurora)" filter="url(#soft)"/></g>
   <rect x="0" y="0" width="1200" height="340" rx="26" fill="url(#halo)"/>
   <rect x="0.75" y="0.75" width="1198.5" height="338.5" rx="25.5" fill="none" stroke="#1E293B" stroke-width="1.5"/>
 
-  <!-- knowledge-graph motif: edges first so nodes sit on top -->
-  <g stroke-linecap="round" fill="none">
-    <!-- spokes from the hub -->
+  <!-- knowledge-graph motif -->
+  <g fill="none" stroke-linecap="round">
     <g stroke="#3B5378" stroke-width="1.7" opacity="0.95">
       <line x1="600" y1="110" x2="505" y2="58"/>
       <line x1="600" y1="110" x2="668" y2="48"/>
@@ -48,49 +121,68 @@
       <line x1="600" y1="110" x2="556" y2="176"/>
       <line x1="600" y1="110" x2="468" y2="126"/>
     </g>
-    <!-- open perimeter chain -->
     <g stroke="#2A3A55" stroke-width="1.4" opacity="0.9">
-      <line x1="505" y1="58" x2="668" y2="48"/>
-      <line x1="668" y1="48" x2="735" y2="112"/>
+      <line x1="505" y1="58"  x2="668" y2="48"/>
+      <line x1="668" y1="48"  x2="735" y2="112"/>
       <line x1="735" y1="112" x2="690" y2="168"/>
       <line x1="690" y1="168" x2="556" y2="176"/>
       <line x1="556" y1="176" x2="468" y2="126"/>
     </g>
-    <!-- leaf edges -->
     <g stroke="#243449" stroke-width="1.2" opacity="0.85">
       <line x1="735" y1="112" x2="762" y2="66"/>
       <line x1="468" y1="126" x2="452" y2="182"/>
     </g>
   </g>
 
-  <!-- hub halo + hub -->
-  <circle cx="600" cy="110" r="40" fill="#8B5CF6" opacity="0.10"/>
-  <circle cx="600" cy="110" r="26" fill="#818CF8" opacity="0.16"/>
+  <!-- trace pulses travelling into the hub -->
+  <g fill="#E7F6FF" filter="url(#glow)">
+    <g transform="translate(600,110)"><circle class="tp t1" r="3" opacity="0"/></g>
+    <g transform="translate(600,110)"><circle class="tp t2" r="3" opacity="0"/></g>
+    <g transform="translate(600,110)"><circle class="tp t3" r="3" opacity="0"/></g>
+    <g transform="translate(600,110)"><circle class="tp t4" r="3" opacity="0"/></g>
+    <g transform="translate(600,110)"><circle class="tp t5" r="3" opacity="0"/></g>
+    <g transform="translate(600,110)"><circle class="tp t6" r="3" opacity="0"/></g>
+  </g>
+
+  <!-- hub -->
+  <circle class="hbeat" cx="600" cy="110" r="36" fill="#8B5CF6" opacity="0.09"/>
+  <circle class="hring" cx="600" cy="110" r="22" fill="#818CF8" opacity="0.14"/>
   <circle cx="600" cy="110" r="15" fill="url(#accent)"/>
-  <circle cx="600" cy="110" r="15" fill="none" stroke="#C4B5FD" stroke-width="1.2" opacity="0.55"/>
+  <circle cx="600" cy="110" r="15" fill="none" stroke="#C4B5FD" stroke-width="1.2" opacity="0.6"/>
+  <circle class="hcore" cx="600" cy="110" r="5" fill="#F1F4FF"/>
 
   <!-- satellite nodes -->
   <g fill="#0F172A" stroke-width="2.2">
-    <circle cx="505" cy="58"  r="8"   stroke="#8B5CF6"/>
-    <circle cx="668" cy="48"  r="10"  stroke="#A78BFA"/>
-    <circle cx="735" cy="112" r="7"   stroke="#22D3EE"/>
-    <circle cx="690" cy="168" r="8.5" stroke="#38BDF8"/>
-    <circle cx="556" cy="176" r="7"   stroke="#8B5CF6"/>
-    <circle cx="468" cy="126" r="8"   stroke="#22D3EE"/>
+    <circle class="sat s1" cx="505" cy="58"  r="8"   stroke="#8B5CF6"/>
+    <circle class="sat s2" cx="668" cy="48"  r="10"  stroke="#A78BFA"/>
+    <circle class="sat s3" cx="735" cy="112" r="7"   stroke="#22D3EE"/>
+    <circle class="sat s4" cx="690" cy="168" r="8.5" stroke="#38BDF8"/>
+    <circle class="sat s5" cx="556" cy="176" r="7"   stroke="#8B5CF6"/>
+    <circle class="sat s6" cx="468" cy="126" r="8"   stroke="#22D3EE"/>
   </g>
-
-  <!-- leaf dots -->
   <g fill="#475569">
     <circle cx="762" cy="66"  r="4.5"/>
     <circle cx="452" cy="182" r="4.5"/>
   </g>
 
   <!-- wordmark -->
-  <text x="600" y="278" text-anchor="middle"
+  <text x="600" y="266" text-anchor="middle"
         font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
         font-size="84" font-weight="700" letter-spacing="-2.5"
         fill="url(#wordmark)">Reasongraph</text>
+  <g mask="url(#wordMask)">
+    <g class="sheenG"><rect x="360" y="200" width="480" height="84" fill="url(#sheen)"/></g>
+  </g>
 
-  <!-- accent rule -->
-  <rect x="440" y="302" width="320" height="2" rx="1" fill="url(#rule)"/>
+  <!-- tagline -->
+  <text x="600" y="296" text-anchor="middle"
+        font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        font-size="11.5" font-weight="500" letter-spacing="3.4"
+        fill="#8CA0BE">GRAPH-NATIVE INFRASTRUCTURE FOR ACCOUNTABLE AI</text>
+
+  <!-- accent rule + travelling light -->
+  <rect x="440" y="305" width="320" height="2" rx="1" fill="url(#rule)"/>
+  <g clip-path="url(#ruleClip)">
+    <g class="ruleG"><rect x="440" y="303" width="86" height="6" rx="3" fill="#BFE9FF" opacity="0.85" filter="url(#glow)"/></g>
+  </g>
 </svg>
