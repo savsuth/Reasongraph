@@ -45,54 +45,50 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # Install the pinned dependency set FIRST so Safety scans Reasongraph's
-          # exact CI/release dependency tree (requirements-ci.txt is generated
-          # from pyproject.toml extras, so this covers the project's real deps).
+          # Install the pinned dependency set FIRST so the audit sees
+          # Reasongraph's exact CI/release dependency tree (requirements-ci.txt
+          # is generated from pyproject.toml extras, so this covers the real deps).
           pip install -r requirements-ci.txt
-          # Tooling AFTER the pinned set: installing safety/bandit/semgrep/jq
-          # first lets the pinned requirements overwrite their transitive deps
-          # (e.g. rich), which breaks the safety CLI at runtime.
-          pip install safety bandit semgrep jq
+          # Tooling AFTER the pinned set so the pinned requirements win any
+          # transitive-dep conflicts with the tools.
+          pip install pip-audit bandit semgrep jq
 
-      - name: Run Safety Check (Package Vulnerabilities)
+      - name: Run pip-audit (Package Vulnerabilities)
+        # Gate on findings for dependency-touching PRs; stay non-blocking on the
+        # scheduled / push runs (same policy as security.yml's audit job) until a
+        # full pass over any pre-existing findings across the [all] tree is done.
+        continue-on-error: ${{ github.event_name != 'pull_request' }}
         run: |
-          # NOTE: Safety 3.x repurposed --output to select a console format
-          # (json/text/screen/...), not a file path. Writing JSON to a file
-          # now requires --save-json; the previous `--output safety-report.json`
-          # usage was silently invalid and never produced a report.
-          safety check --save-json safety-report.json || true
+          # pip-audit (PyPA) queries the Python Packaging Advisory Database and
+          # OSV with no account or API key — Safety 3.x now refuses to run
+          # without authentication, which broke this job on every scheduled run.
+          # Matches the tool already used by security.yml's `audit` job.
+          pip-audit -r requirements-ci.txt --format json --output pip-audit-report.json --progress-spinner off || true
 
-          # Guard 1: fail loudly if Safety exited before writing a report at all
-          # (network error, API auth failure, tool crash). Without this check a
-          # missing or empty file causes jq to fall back to "0", making a broken
-          # scanner indistinguishable from a clean scan.
-          if [ ! -s safety-report.json ]; then
-            echo "::error::Safety scan produced no report (safety-report.json is missing or empty). Treating as failure — check for network errors, API auth failures, or Safety crashes in the logs above."
+          # Guard 1: fail loudly if pip-audit exited before writing a report at
+          # all (network error, tool crash) rather than treating it as a clean scan.
+          if [ ! -s pip-audit-report.json ]; then
+            echo "::error::pip-audit produced no report (pip-audit-report.json missing or empty). Check for network errors or a pip-audit crash above."
             exit 1
           fi
 
           echo "Checking for package vulnerabilities..."
 
-          # No || echo "0" fallback: if jq fails (malformed JSON, missing key,
-          # vulnerabilities:null) VULNS will be empty or "null" so guard 2 below
-          # catches it rather than silently treating the broken report as zero.
-          VULNS=$(jq '.vulnerabilities | length' safety-report.json 2>/dev/null)
-
-          # Guard 2: ensure VULNS is a non-negative integer before the -gt
-          # comparison. "null" (missing/null key) or "" (jq parse failure) would
-          # cause bash's -gt to throw an arithmetic error and fall through to the
-          # success branch — the same silent-pass bug as a missing file.
+          # Guard 2: VULNS must be a non-negative integer before the -gt test;
+          # "" (jq parse failure) or "null" would otherwise throw and fall
+          # through to the success branch.
+          VULNS=$(jq '[.dependencies[]?.vulns[]?] | length' pip-audit-report.json 2>/dev/null)
           if ! [[ "$VULNS" =~ ^[0-9]+$ ]]; then
-            echo "::error::Safety report exists but 'vulnerabilities' is missing or non-numeric (got: '${VULNS}'). The report may be malformed or Safety may have written an error-only JSON. Treating as failure."
+            echo "::error::pip-audit report exists but the vuln count is non-numeric (got: '${VULNS}'). The report may be malformed."
             exit 1
           fi
 
           if [ "$VULNS" -gt 0 ]; then
             echo "❌ Security vulnerabilities found: $VULNS"
-            echo "CI will fail to prevent merging of vulnerable dependencies"
+            echo "(blocks dependency-touching PRs; informational on scheduled/push runs)"
             echo ""
             echo "Vulnerability details:"
-            jq -r '.vulnerabilities[] | "- \(.package_name)==\(.analyzed_version): \(.vulnerability_id) (\(.CVE // "no CVE assigned"))"' safety-report.json || true
+            jq -r '.dependencies[] | select(.vulns | length > 0) | .name as $n | .version as $v | .vulns[] | "- \($n)==\($v): \(.id) (fix: \((.fix_versions // []) | join(", ") // "none"))"' pip-audit-report.json || true
             exit 1
           else
             echo "✅ No security vulnerabilities found"
@@ -140,7 +136,7 @@ jobs:
           name: security-reports
           retention-days: 14
           path: |
-            safety-report.json
+            pip-audit-report.json
             bandit-report.json
             semgrep-report.json
         
@@ -184,12 +180,15 @@ jobs:
               return lines.join('\n');
             }
 
-            const safetySection = renderSection(
-              'Safety — dependency vulnerabilities',
-              'safety-report.json',
-              (data) => (data.vulnerabilities || []).map(
-                (v) => `- \`${v.package_name}==${v.analyzed_version}\`: ${v.vulnerability_id}` +
-                  (v.CVE ? ` (${v.CVE})` : '') + ` — ${v.advisory || 'no advisory text'}`
+            const depAuditSection = renderSection(
+              'pip-audit — dependency vulnerabilities',
+              'pip-audit-report.json',
+              (data) => (data.dependencies || []).flatMap(
+                (d) => (d.vulns || []).map(
+                  (v) => `- \`${d.name}==${d.version}\`: ${v.id}` +
+                    (v.aliases && v.aliases.length ? ` (${v.aliases.join(', ')})` : '') +
+                    ` — fix: ${(v.fix_versions && v.fix_versions.length) ? v.fix_versions.join(', ') : 'none'}`
+                )
               )
             );
 
@@ -212,7 +211,7 @@ jobs:
             const comment = [
               '# 🔒 Security Scan Results',
               '',
-              safetySection,
+              depAuditSection,
               '',
               banditSection,
               '',
