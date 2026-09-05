@@ -26,3 +26,13 @@ cookbook/**/*.ipynb linguist-documentation
 
 # Mark data directories as documentation or vendored
 **/data/* linguist-vendored
+
+# Keep the GitHub "Languages" bar to what was actually written for this
+# project: Python (core engine, MCP, tests), TypeScript/CSS/JavaScript
+# (explorer/ Knowledge Explorer UI), plus Bicep + Dockerfile for infra.
+# The entries below are framework scaffolding, not authored code.
+#
+# Helm _helpers.tpl boilerplate (drops "Go Template" from the bar):
+deploy/helm/**/*.tpl linguist-generated
+# Vite entry stub (drops the "HTML" sliver):
+explorer/index.html linguist-generated
