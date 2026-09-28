@@ -1257,9 +1257,9 @@ docling-core==2.91.0 \
     #   docling-ibm-models
     #   docling-parse
     #   docling-slim
-docling-ibm-models==3.14.0 \
-    --hash=sha256:795d39cd0f7b1e14a702e681b0ef0f9bd31deaedddb4e2686ad577296ecb8fc9 \
-    --hash=sha256:def964e3d524f66c7321ef9d48d4021278f14319f01d3f78058cd2324f641e22
+docling-ibm-models==4.0.3 \
+    --hash=sha256:509e89af75e06b48500977dca11ecb6022e81b1526c90dd54587a60ccc82bdb6 \
+    --hash=sha256:82c6c6ad6622aa9e58c4d745c26fba12eef54927f32d44f21f24bcb5be5464ff
     # via docling-slim
 docling-parse==7.12.1 \
     --hash=sha256:0fcc7234daf1db53e1c3d8063083d850620c3e44d2975be1c01fe0bbcd86b3d1 \
