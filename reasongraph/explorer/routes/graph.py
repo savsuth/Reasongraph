@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 from fastapi import APIRouter, Depends, HTTPException, Query
 
 from ...utils.helpers import classify_path_distance
+from ...utils.logging import sanitize_for_log
 from ..dependencies import get_session
 from ..schemas import (
     DistanceMatrixRequest,
@@ -535,7 +536,12 @@ async def distance_matrix(
                         unreachable.append((src, tgt))
                         unreachable.append((tgt, src))
             except Exception as exc:
-                logger.debug("distance_matrix pair (%s, %s) failed: %s", src, tgt, exc)
+                logger.debug(
+                    "distance_matrix pair (%s, %s) failed: %s",
+                    sanitize_for_log(src),
+                    sanitize_for_log(tgt),
+                    sanitize_for_log(exc),
+                )
                 unreachable.append((src, tgt))
                 unreachable.append((tgt, src))
 

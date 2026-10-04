@@ -272,6 +272,7 @@ class QueryEngine:
             Query results
         """
         # Check cache
+        cache_key = None
         if use_cache and self._cache_enabled:
             cache_key = self._generate_cache_key(query, parameters)
             if cache_key in self._cache:
@@ -281,7 +282,7 @@ class QueryEngine:
         result = self.backend.execute_query(query, parameters, **options)
 
         # Cache result
-        if use_cache and self._cache_enabled:
+        if cache_key is not None:
             self._cache[cache_key] = result
 
         return result

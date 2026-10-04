@@ -86,7 +86,7 @@ except ImportError:
     instructor = None
 
 from ..utils.exceptions import ProcessingError
-from ..utils.logging import get_logger
+from ..utils.logging import get_logger, sanitize_for_log
 from .config import config
 from .registry import provider_registry
 
@@ -1487,7 +1487,9 @@ class ProviderPool:
         if key in self._providers:
             return self._providers[key]
             
-        self.logger.debug(f"Creating new provider instance for {name}")
+        self.logger.debug(
+            "Creating new provider instance for %s", sanitize_for_log(name)
+        )
         provider = self._create_provider(name, **kwargs)
         self._providers[key] = provider
         return provider

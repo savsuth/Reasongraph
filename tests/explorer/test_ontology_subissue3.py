@@ -697,6 +697,28 @@ def test_ontology_load_does_not_swallow_422_from_ingestor_success_path(client):
     fallback_parse.assert_not_called()
 
 
+def test_ontology_load_returns_422_when_fallback_parser_fails(client):
+    """When OntologyIngestor fails and the basic fallback parser also fails,
+    the endpoint must answer 422, not leak a 500."""
+    with patch(
+        "reasongraph.ingest.ontology_ingestor.OntologyIngestor.ingest_ontology",
+        side_effect=RuntimeError("ingestor failed"),
+    ), patch(
+        "reasongraph.explorer.routes.ontology._parse_rdf_sync",
+        side_effect=ValueError("bad turtle"),
+    ):
+        response = client.post(
+            "/api/ontology/load",
+            json={
+                "content": "@prefix ex: <http://example.org/> . ex:A a ex:Thing .",
+                "format": "turtle",
+            },
+        )
+
+    assert response.status_code == 422
+    assert "bad turtle" in response.json()["detail"]
+
+
 # ---------------------------------------------------------------------------
 # refresh_ontology — single combined add_nodes_and_edges() coverage (#775)
 # ---------------------------------------------------------------------------

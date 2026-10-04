@@ -82,7 +82,6 @@ Main Classes:
     - SemanticNetworkVisualizer: Semantic network structure and type distributions
     - AnalyticsVisualizer: Graph analytics, centrality rankings, and metrics dashboards
     - TemporalVisualizer: Temporal timeline, patterns, and snapshot comparisons
-    - D3Visualizer: D3.js-based interactive visualizations for web dashboards
 
 Convenience Functions:
     - visualize_kg: Knowledge graph visualization wrapper
@@ -143,7 +142,6 @@ __all__ = [
     "SemanticNetworkVisualizer",
     "AnalyticsVisualizer",
     "TemporalVisualizer",
-    "D3Visualizer",
     # Convenience functions
     "visualize_kg",
     "visualize_ontology",

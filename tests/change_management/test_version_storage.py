@@ -102,11 +102,13 @@ class TestInMemoryVersionStorage:
     def test_delete_method(self):
         """Test the delete method."""
         # Delete non-existent returns False
-        assert not self.storage.delete("nonexistent")
+        deleted = self.storage.delete("nonexistent")
+        assert not deleted
         
         # Save and delete existing returns True
         self.storage.save(self.sample_snapshot)
-        assert self.storage.delete("v1.0")
+        deleted = self.storage.delete("v1.0")
+        assert deleted
         assert not self.storage.exists("v1.0")
     
     def test_data_isolation(self):
@@ -222,11 +224,13 @@ class TestSQLiteVersionStorage:
     def test_delete_method(self):
         """Test the delete method with SQLite."""
         # Delete non-existent returns False
-        assert not self.storage.delete("nonexistent")
+        deleted = self.storage.delete("nonexistent")
+        assert not deleted
         
         # Save and delete existing returns True
         self.storage.save(self.sample_snapshot)
-        assert self.storage.delete("v1.0")
+        deleted = self.storage.delete("v1.0")
+        assert deleted
         assert not self.storage.exists("v1.0")
     
     def test_directory_creation(self):

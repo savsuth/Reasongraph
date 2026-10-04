@@ -38,7 +38,6 @@ try:
     from google_auth_oauthlib.flow import InstalledAppFlow
     from google.auth.transport.requests import Request
     from googleapiclient.discovery import build
-    from googleapiclient.errors import HttpError
     from googleapiclient.http import MediaIoBaseDownload
     import io
 except (ImportError, OSError):
@@ -46,7 +45,6 @@ except (ImportError, OSError):
     InstalledAppFlow = None
     Request = None
     build = None
-    HttpError = None
     MediaIoBaseDownload = None
     io = None
 
@@ -290,12 +288,6 @@ class GDriveIngestor:
                 metadata={"include_subfolders": include_subfolders},
             )
 
-        except HttpError as e:
-            self.progress_tracker.stop_tracking(
-                tracking_id, status="failed", message=str(e)
-            )
-            self.logger.error(f"Failed to ingest folder: {e}")
-            raise ProcessingError(f"Failed to ingest folder: {e}") from e
         except Exception as e:
             self.progress_tracker.stop_tracking(
                 tracking_id, status="failed", message=str(e)
@@ -381,12 +373,6 @@ class GDriveIngestor:
 
             return result
 
-        except HttpError as e:
-            self.progress_tracker.stop_tracking(
-                tracking_id, status="failed", message=str(e)
-            )
-            self.logger.error(f"Failed to ingest file: {e}")
-            raise ProcessingError(f"Failed to ingest file: {e}") from e
         except Exception as e:
             self.progress_tracker.stop_tracking(
                 tracking_id, status="failed", message=str(e)

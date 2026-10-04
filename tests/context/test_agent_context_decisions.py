@@ -361,5 +361,24 @@ class TestAgentContextDecisions:
             pass
 
 
+def test_find_precedents_find_nodes_fallback_builds_decisions():
+    """The find_nodes fallback must not hit an UnboundLocalError on Decision
+    when the knowledge graph has no find_precedents_by_scenario."""
+
+    class _KnowledgeGraph:
+        def find_nodes(self, node_type=None):
+            return [{"id": "d1", "content": "scenario", "metadata": {"category": "c"}}]
+
+    stub = Mock(spec=[])
+    stub._decision_backend = "context_graph"
+    stub.knowledge_graph = _KnowledgeGraph()
+    stub.vector_store = None
+
+    results = AgentContext.find_precedents(stub, "scenario")
+
+    assert [d.decision_id for d in results] == ["d1"]
+    assert isinstance(results[0], Decision)
+
+
 if __name__ == "__main__":
     pytest.main([__file__])
