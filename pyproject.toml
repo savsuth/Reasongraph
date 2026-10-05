@@ -204,7 +204,7 @@ agno = ["agno>=1.0.0"]
 # crewai core provides BaseTool and BaseKnowledgeSource; crewai-tools is not
 # needed (it pulls vulnerable transitive deps like chromadb) and would only
 # duplicate the prebuilt tooling users can install separately.
-crewai = ["crewai>=0.80.0"]
+crewai = ["crewai>=1.15.23"]
 
 # ---- File Watching ----
 watch = ["watchdog>=6.0.0"]
