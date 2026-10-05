@@ -175,6 +175,22 @@ def get_logger(
     return logger
 
 
+def sanitize_for_log(value: Any) -> str:
+    """
+    Make a value safe to interpolate into a log message.
+
+    Removes CR and LF so user-controlled input cannot forge additional
+    log lines (CWE-117).
+
+    Args:
+        value: Any value; non-strings are converted with str()
+
+    Returns:
+        The value as a single-line string
+    """
+    return str(value).replace("\r\n", "").replace("\n", "").replace("\r", "")
+
+
 def log_performance(func_name: str, execution_time: float, **metrics: Any) -> None:
     """
     Log performance metrics for function execution.

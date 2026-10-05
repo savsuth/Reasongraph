@@ -20,6 +20,7 @@ from ..schemas import (
     TemporalPatternResponse,
 )
 from ..session import GraphSession
+from ...utils.logging import sanitize_for_log
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/temporal", tags=["Temporal"])
@@ -49,14 +50,21 @@ def _parse_flexible_dt(value: str) -> Optional[datetime]:
             dt = dt.astimezone(timezone.utc).replace(tzinfo=None)
         return dt
     except (ValueError, AttributeError) as exc:
-        logger.warning("Malformed temporal value %r; treating node as always active (%s)", value, exc)
+        logger.warning(
+            "Malformed temporal value %r; treating node as always active (%s)",
+            sanitize_for_log(value),
+            sanitize_for_log(exc),
+        )
         return None
 
 
 def _parse_query_dt(value: str) -> datetime:
     parsed = _parse_flexible_dt(value)
     if parsed is None:
-        logger.warning("Could not parse timestamp %r; defaulting to utcnow()", value)
+        logger.warning(
+            "Could not parse timestamp %r; defaulting to utcnow()",
+            sanitize_for_log(value),
+        )
         return datetime.now(UTC).replace(tzinfo=None)
     return parsed
 
@@ -156,7 +164,11 @@ async def distance_history(
             except Exception as exc:
                 logger.warning(
                     "distance_history path computation failed for source=%r target=%r metric=%r: %s",
-                    source, target, metric, exc, exc_info=True,
+                    sanitize_for_log(source),
+                    sanitize_for_log(target),
+                    sanitize_for_log(metric),
+                    sanitize_for_log(exc),
+                    exc_info=True,
                 )
         now = datetime.now(UTC).replace(tzinfo=None)
         snap = DistanceSnapshot(
@@ -201,7 +213,12 @@ async def distance_history(
             except Exception as exc:
                 logger.warning(
                     "distance_history path computation failed for source=%r target=%r at=%s metric=%s: %s",
-                    source, target, sample_time.isoformat(), metric, exc, exc_info=True,
+                    sanitize_for_log(source),
+                    sanitize_for_log(target),
+                    sample_time.isoformat(),
+                    sanitize_for_log(metric),
+                    sanitize_for_log(exc),
+                    exc_info=True,
                 )
                 hop_count = None
 

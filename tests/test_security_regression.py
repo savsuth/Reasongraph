@@ -123,6 +123,20 @@ class TestSparqlReadOnlyValidation:
         )
         assert _is_read_only_query(query)
 
+    def test_prefix_without_closing_bracket_is_linear(self):
+        """A PREFIX line full of '<' with no closing '>' must not backtrack
+        quadratically (CodeQL py/polynomial-redos)."""
+        import time
+
+        query = "PREFIX a" + "<" * 50_000
+        start = time.perf_counter()
+        assert not _is_read_only_query(query)
+        assert time.perf_counter() - start < 1.0
+
+    def test_prefix_without_space_before_iri_allowed(self):
+        query = "PREFIX ex:<http://example.org/>\nSELECT ?s WHERE { ?s ?p ?o }"
+        assert _is_read_only_query(query)
+
     def test_inline_prefix_before_select_allowed(self):
         """PREFIX declaration on the same line as the query keyword (inline
         prologue) must be stripped correctly so SELECT is seen first.

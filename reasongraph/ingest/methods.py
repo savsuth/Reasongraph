@@ -808,10 +808,12 @@ def ingest_stream(
                 source.get("topic", ""), source.get("bootstrap_servers", []), **kwargs
             )
         elif method == "rabbitmq":
+            connection_url = source.get("connection_url") or (
+                f"amqp://{source.get('host', 'localhost')}:{source.get('port', 5672)}"
+            )
             return ingestor.ingest_rabbitmq(
                 source.get("queue", ""),
-                source.get("host", "localhost"),
-                source.get("port", 5672),
+                connection_url,
                 **kwargs,
             )
         elif method == "kinesis":

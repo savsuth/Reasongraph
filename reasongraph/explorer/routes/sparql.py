@@ -66,9 +66,14 @@ _FORBIDDEN_KEYWORDS = re.compile(
 # way to match.  No end-of-line anchor is needed or used, which correctly
 # handles both inline prologues (`PREFIX ex: <...> SELECT ...` on one line)
 # and CRLF line endings (`\r\n`) without any special casing.
+#
+# The prefix name uses `[^\s<]+` rather than `\S+`: `\S+` can also match
+# `<`, so on a line such as `PREFIX a<<<<...` with no closing `>` the engine
+# tried every split between the prefix name and the IRI body, which is
+# O(n^2) again. A prefix name never contains `<`, so the split is now unique.
 _COMMENT_LINE = re.compile(r"(?:^|(?<=\s))#[^\n]*", re.MULTILINE)
 _PREFIX_DECL = re.compile(
-    r"^[ \t]*(?:PREFIX[ \t]+\S+|BASE)[ \t]*<[^>\r\n]*>[ \t]*",
+    r"^[ \t]*(?:PREFIX[ \t]+[^\s<]+|BASE)[ \t]*<[^>\r\n]*>[ \t]*",
     re.IGNORECASE | re.MULTILINE,
 )
 

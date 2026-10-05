@@ -555,28 +555,31 @@ def retry_on_error(
 
     Returns:
         Decorator function
+
+    Raises:
+        ValueError: If max_retries is negative
     """
     import functools
     import time
+
+    if max_retries < 0:
+        raise ValueError(f"max_retries must be >= 0, got {max_retries}")
 
     def decorator(func):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
             current_delay = delay
-            last_exception = None
+            attempt = 0
 
-            for attempt in range(max_retries + 1):
+            while True:
                 try:
                     return func(*args, **kwargs)
-                except exceptions as e:
-                    last_exception = e
-                    if attempt < max_retries:
-                        time.sleep(current_delay)
-                        current_delay *= backoff_factor
-                    else:
+                except exceptions:
+                    if attempt >= max_retries:
                         raise
-
-            raise last_exception
+                    time.sleep(current_delay)
+                    current_delay *= backoff_factor
+                    attempt += 1
 
         return wrapper
 

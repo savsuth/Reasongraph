@@ -1773,7 +1773,6 @@ class AgentContext:
                     as_of=as_of,
                 )
                 # Convert to Decision objects if needed
-                from .decision_models import Decision
                 decisions = []
                 for precedent in precedents:
                     decision_data = precedent["decision"]

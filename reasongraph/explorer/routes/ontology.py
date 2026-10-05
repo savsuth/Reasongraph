@@ -20,6 +20,7 @@ from pydantic import BaseModel, Field
 from ..session import GraphSession
 from ..dependencies import get_session
 from ..utils.rdf_parser import _safe_parse_rdf
+from ...utils.logging import sanitize_for_log
 try:
     from rdflib.namespace import DCT, DC
 except ImportError:
@@ -1493,11 +1494,14 @@ async def load_ontology(
         logger.warning(f"OntologyIngestor failed, falling back to basic parsing: {ingest_exc}")
 
         # Fallback to basic parsing
-        nodes, edges, metadata = await asyncio.to_thread(
-            _parse_rdf_sync, content_str.encode("utf-8"), fmt
-        )
-    except Exception as exc:
-        raise HTTPException(status_code=422, detail=f"Could not parse ontology: {exc}") from exc
+        try:
+            nodes, edges, metadata = await asyncio.to_thread(
+                _parse_rdf_sync, content_str.encode("utf-8"), fmt
+            )
+        except Exception as exc:
+            raise HTTPException(
+                status_code=422, detail=f"Could not parse ontology: {exc}"
+            ) from exc
 
     # Fallback path - use basic parsing
     try:
@@ -2452,7 +2456,11 @@ async def _fetch_analysis_graph(
     if total_nodes > _MAX_ANALYSIS_NODES or total_edges > _MAX_ANALYSIS_NODES:
         logger.warning(
             "%s: graph for %s is too large to analyse (nodes=%d, edges=%d, limit=%d); skipping.",
-            log_tag, uri, total_nodes, total_edges, _MAX_ANALYSIS_NODES,
+            log_tag,
+            sanitize_for_log(uri),
+            total_nodes,
+            total_edges,
+            _MAX_ANALYSIS_NODES,
         )
         raise GraphTruncationError(
             f"Graph size (nodes={total_nodes}, edges={total_edges}) exceeds maximum analysis limit ({_MAX_ANALYSIS_NODES}). "

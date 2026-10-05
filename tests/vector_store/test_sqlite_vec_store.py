@@ -344,7 +344,8 @@ class TestSQLiteVecStoreDelete:
 
     def test_delete_empty(self, store):
         """Test deleting empty list of IDs."""
-        assert store.delete([]) is True
+        deleted = store.delete([])
+        assert deleted is True
 
 
 class TestSQLiteVecStoreReadOnly:
