@@ -4075,9 +4075,9 @@ nvidia-nvjitlink==13.4.92 \
     #   nvidia-cufft
     #   nvidia-cusolver
     #   nvidia-cusparse
-nvidia-nvshmem-cu13==3.4.5 \
-    --hash=sha256:290f0a2ee94c9f3687a02502f3b9299a9f9fe826e6d0287ee18482e78d495b80 \
-    --hash=sha256:6dc2a197f38e5d0376ad52cd1a2a3617d3cdc150fd5966f4aee9bcebb1d68fe9
+nvidia-nvshmem-cu13==3.8.0 \
+    --hash=sha256:8120175024f52a64323cfc5d645e95ac7345f1ee243a998d140ce19163285294 \
+    --hash=sha256:81a4d1f666543e6d34df6d2ff940c7da1435e34e186aab6f3c2b48861b64ef38
     # via torch
 nvidia-nvtx==13.0.85 \
     --hash=sha256:4936d1d6780fbe68db454f5e72a42ff64d1fd6397df9f363ae786930fd5c1cd4 \
