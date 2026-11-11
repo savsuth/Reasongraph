@@ -9,7 +9,7 @@ RUN npm ci
 COPY explorer/ ./
 RUN mkdir -p /app/reasongraph && npm run build
 
-FROM python:3.14-slim AS runtime
+FROM python:3.15-slim AS runtime
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
